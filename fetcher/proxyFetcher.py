@@ -152,6 +152,14 @@ class ProxyFetcher(object):
             r.text)
         for proxy in proxies:
             yield ':'.join(proxy)
+            
+    @staticmethod
+    def ProxyQingting():
+        resp = requests.get("https://proxyapi.horocn.com/api/v2/proxies?order_id=RXH01722759714015036&num=2&format=json"
+                            "&line_separator=win&can_repeat=yes&user_token=6d6e2ee24d6012f702a20cbc37db537f").json()
+        if resp["code"] == 0:
+          for proxy_data in resp["data"]:
+              yield proxy_data["host"] + ":" + proxy_data["port"]
 
     # @staticmethod
     # def wallProxy01():
